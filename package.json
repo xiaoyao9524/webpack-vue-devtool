@@ -34,6 +34,7 @@
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-withimg-loader": "^0.1.16",
+    "portscanner": "^2.2.0",
     "postcss-loader": "^2.1.6",
     "precss": "^3.1.2",
     "transform-runtime": "^0.0.0",

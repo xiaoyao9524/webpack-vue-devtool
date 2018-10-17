@@ -3,28 +3,23 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-// 配置入口文件和plugins
-const projectConfig = require('../config');
-const config = projectConfig.config.pageConfig;
+// 配置入口文件和html-webpack-plugin
+const config = require('../config');
+const pageConfig = config.pageConfig;
 let entry = {};
-let plugins = [
-  new VueLoaderPlugin(),
-  new CleanWebpackPlugin(["dist"], {
-    root: path.resolve(__dirname, "../")
-  })
-];
-for (let i = 0; i < config.length; i++) {
+let htmlList = [];
+for (let item of pageConfig) {
   // entry
-  let item = config[i];
   entry[item['entryName']] = item['entryPath'];
-  // plugins
-  let pluginItem = {
-    filename: item['filename'],
-    template: item['template'],
-    inject: item['inject'] ? item['inject'] : true,
-    chunks: item['chunks']
-  };
-  plugins.push(new HtmlWebpackPlugin(pluginItem));
+  // html-webpack-plugin
+  htmlList.push(new HtmlWebpackPlugin(
+      {
+        filename: item['filename'],
+        template: item['template'],
+        inject: item['inject'] ? item['inject'] : true,
+        chunks: item['chunks']
+      }
+  ));
 }
 
 module.exports = {
@@ -46,7 +41,13 @@ module.exports = {
     chunkFilename: "static/js/[name].[hash].bundle.js",
     path: path.resolve(__dirname, "../", "dist")
   },
-  plugins,
+  plugins: [
+    new VueLoaderPlugin(),
+    new CleanWebpackPlugin(["dist"], {
+      root: path.resolve(__dirname, "../")
+    }),
+    ...htmlList
+  ],
   module: {
     rules: [
       {

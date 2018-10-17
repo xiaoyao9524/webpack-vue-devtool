@@ -8,16 +8,25 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: "app",
     data () {
       return {
-        msg: '测试信息'
+        msg: 'Hello World!!!',
+        flag: false
       }
+    },
+    created () {
+      axios.get('/index/recommend.json')
+          .then((res) => {
+            console.log(res.data.list)
+          })
     },
     methods: {
       test () {
-        this.msg = '测试成功';
+        this.flag = !this.flag;
+        this.msg = this.flag ? 'Hello Vue!!!' : 'Hello World!!!';
       }
     }
   }
