@@ -1,13 +1,13 @@
 {
-  "name": "name",
+  "name": "{{name}}",
   "version": "1.0.0",
-  "description": "description",
+  "description": "{{description}}",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js"
   },
-  "author": "author",
+  "author": "{{author}}",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
