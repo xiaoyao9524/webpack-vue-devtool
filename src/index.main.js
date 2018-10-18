@@ -4,9 +4,12 @@
 //   new VConsole();
 // }
 
-// 测试Vue
-import Vue from 'vue'
-import App from './app.vue'
+import 'babel-polyfill';
+import Vue from 'vue';
+import App from './app.vue';
+import FastClick from 'fastclick';
+
+FastClick.attach(document.body);
 
 Vue.config.productionTip = false;
 
